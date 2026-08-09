@@ -1,0 +1,147 @@
+[
+  {
+    "question": "Random Variable",
+    "answer": "It is a function that assigns a number to each possible outcome of a random experiment. A random experiment has an uncertain outcome, and a random variable maps each outcome to a real number. There are two main types: continuous (any value in a range, like the time it takes for a web page to load) and discrete (countable values).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Central Limit Theorem",
+    "answer": "No matter the original population's distribution, if you take large enough random samples and calculate their means, the distribution of those means will be approximately normal (bell-shaped). For the CLT to work well, samples should be independent, come from the same distribution with a finite variance, and the sample size should be adequate (often n \u2265 30).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Hypothesis Testing",
+    "answer": "It's a formal process to determine if collected data supports a claim about a population. It begins with two opposing statements: the Null Hypothesis (Ho), which is the default assumption of 'no effect,' and the Alternative Hypothesis (Ha), which is the claim being tested.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Define p value",
+    "answer": "A p-value is the probability of observing data at least as extreme as what you collected, assuming the null hypothesis (Ho) is true. A smaller p-value indicates stronger evidence against the null hypothesis. It does not tell you the probability that Ho is true.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Difference Between Bagging and Boosting",
+    "answer": "Bagging involves training models in parallel on different data subsets and combining their votes, primarily to reduce variance. Boosting trains models sequentially, where each new model corrects the errors of the previous one, primarily to reduce bias. Bagging uses bootstrap sampling, while boosting uses weighted sampling for misclassified points. In bagging, all models are weighted equally, whereas in boosting, models are weighted based on performance.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is random in random forest",
+    "answer": "The randomness comes from two main sources: 1. **Random Data Sampling**: Each tree is trained on a random sample of data created using bootstrap sampling (sampling with replacement). 2. **Random Feature Selection**: When splitting a node, the algorithm only considers a random subset of features to find the best split, which helps to de-correlate the trees.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Describe the working of xgboost and how regularization works there",
+    "answer": "XGBoost (Extreme Gradient Boosting) is an optimized implementation of gradient boosting that builds decision trees sequentially. Each new tree is fit to the pseudo-residuals (the negative gradient of the loss function) of the previous model's predictions. It uses second-order optimization (gradient and Hessian) for faster convergence. Regularization is built into its objective function, including both L1 and L2 penalties, which helps prevent overfitting by penalizing model complexity and encouraging smaller, more consistent adjustments.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Dying neuron problem",
+    "answer": "This occurs in neural networks, particularly those using ReLU activation, when a neuron becomes permanently inactive and always outputs zero. This happens if the neuron consistently receives large negative inputs during training, causing its weights to stop updating and hindering the network's ability to learn. To prevent this, one can use alternative activation functions like Leaky ReLU, employ proper weight initialization strategies, or use batch normalization.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is K means clustering",
+    "answer": "K-means is an unsupervised algorithm that partitions a dataset into a specified number (K) of clusters. It works by: 1. **Initializing** K random centroids. 2. **Assigning** each data point to its nearest centroid. 3. **Updating** the centroids by calculating the mean of all points within each cluster. These steps are repeated until the centroids stabilize.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is k means++",
+    "answer": "K-means++ is an improvement over the standard K-means algorithm that provides a smarter way to initialize the starting centroids to avoid poor clustering results. The first centroid is chosen randomly. Subsequent centroids are chosen from the remaining data points with a probability proportional to their squared distance from the nearest existing centroid. After initialization, the standard K-means algorithm proceeds.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What are other clustering methods than k means",
+    "answer": "Other methods include: **Hierarchical Clustering** (builds a tree of nested clusters), **DBSCAN** (a density-based method for arbitrarily shaped clusters), **Gaussian Mixture Models (GMM)** (a probabilistic model assuming data comes from a mix of Gaussian distributions), **Mean Shift** (shifts points towards local density centers), and **Spectral Clustering** (uses eigenvalues of a similarity matrix for dimensionality reduction before clustering).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "In hierarchical clustering what does linkage refers to?",
+    "answer": "Linkage refers to the criterion used to calculate the distance between two clusters to decide which ones to merge. Common types are: **Single Linkage** (shortest distance between any two points), **Complete Linkage** (farthest distance between any two points), **Average Linkage** (average distance between all pairs of points), and **Ward's Linkage** (merges clusters to minimize the increase in within-cluster variance).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "When we scale the dataset is there in any impact on decision tree",
+    "answer": "No, scaling a dataset typically does not have a significant impact on a decision tree's performance. This is because decision trees make splits based on threshold comparisons on individual features (e.g., feature > value), not on distance metrics. The relative ordering of values within a feature is what matters, and scaling does not change this order.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Initialization method for deep learning",
+    "answer": "Two common methods are: **Xavier (Glorot) Initialization**, which sets the variance of the weights to Var(W) = 2 / (n_in + n_out), and **He Initialization**, which sets the variance to Var(W) = 2 / n_in and is particularly effective for layers using ReLU activation functions.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Moment Gradient descent",
+    "answer": "Momentum is a technique used to accelerate the convergence of gradient descent. It modifies the weight update rule by incorporating a fraction of the previous update. This helps the optimizer 'remember' the direction of past gradients, which can smooth out oscillations and help navigate ravines in the loss landscape more effectively.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is Bernoulli distribution?",
+    "answer": "A discrete probability distribution that describes a single trial with only two possible outcomes: success (1) or failure (0).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Binomial distribution",
+    "answer": "A discrete probability distribution that describes the number of successes in a fixed number of independent trials, where each trial has only two possible outcomes.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "The Poisson distribution",
+    "answer": "Calculates the probability of a specific number of events occurring within a fixed interval of time or space, given a known average rate of occurrence.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is correlation and covariance",
+    "answer": "**Covariance** measures how two variables change together; its value can range from negative infinity to positive infinity. **Correlation** is a standardized measure of the strength and direction of the *linear* relationship between two variables, scaled to a range of -1 to +1.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What is entropy In statistic",
+    "answer": "Entropy measures the amount of uncertainty or randomness in a probability distribution. For a discrete variable, it is calculated as H(X) = - \u03a3 p_i * log2(p_i), where p_i is the probability of the i-th outcome. Higher entropy means more uncertainty, while lower entropy means more predictability.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Difference between entropy and cross entropy",
+    "answer": "**Entropy** measures the uncertainty within a *single* probability distribution. **Cross-entropy** measures the difference between *two* probability distributions, a 'true' distribution (p) and a 'predicted' distribution (q). It is used in machine learning to measure how well a model's predictions align with the true labels.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "A with B == b with A in cross entropy?",
+    "answer": "No, cross-entropy is **not symmetric**. The formula H(P, Q) = -\u03a3 P(x) * log(Q(x)) shows that the roles of the true distribution (P) and the predicted distribution (Q) are different. Therefore, H(P, Q) is generally not equal to H(Q, P).",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "How will we check about the errors normally distributed or not",
+    "answer": "You can use both visual methods and statistical tests: 1. **Visual Inspection**: Plot a **histogram** of the residuals to see if it has a bell shape, or use a **Q-Q Plot**, where normally distributed residuals will form a straight line. 2. **Statistical Tests**: Use formal tests like the **Shapiro-Wilk Test** or the **Kolmogorov-Smirnov Test**.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "What are the regularisation mehods",
+    "answer": "Common methods include: **L1 Regularization (Lasso)**, which adds the absolute value of coefficients and can perform feature selection. **L2 Regularization (Ridge)**, which adds the squared value of coefficients to reduce their magnitude. **Elastic Net**, which combines L1 and L2. **Dropout**, which randomly deactivates neurons during training. **Early Stopping**, which halts training when validation performance degrades.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Which evaluation matrix imbalance data classification?",
+    "answer": "For imbalanced datasets, accuracy is often misleading. Better metrics include: **Precision** (accuracy of positive predictions), **Recall** (proportion of actual positives correctly identified), **F1-Score** (harmonic mean of precision and recall), and the **AUC-ROC Curve** (Area Under the ROC Curve), which summarizes model performance across all classification thresholds.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Radial Basis Function (RBF) Kernel",
+    "answer": "The RBF kernel is a popular function used in Support Vector Machines (SVMs) to handle non-linear relationships. Its formula is K(x, y) = exp(-\u03b3||x-y||^2), where \u03b3 is a parameter that controls the kernel's width. It is powerful for complex patterns but can be computationally expensive and sensitive to the choice of \u03b3.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Is 3-layer neural network with all sigmoid activation functions is susceptible to the vanishing gradient problem?",
+    "answer": "Yes. The sigmoid function's gradient becomes very small for large positive or negative inputs (it saturates). During backpropagation, these small gradients are multiplied across layers, causing the overall gradient for the earlier layers to 'vanish' or become extremely small, which slows down or halts the learning process for those layers.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Exploding gradient in neurall network how to handle",
+    "answer": "Exploding gradients occur when gradients become excessively large, leading to unstable training. Strategies to handle this include: **Gradient Clipping** (capping the gradient's magnitude at a threshold), **Careful Weight Initialization** (using methods like Xavier or He), and using **Batch Normalization** to stabilize layer inputs.",
+    "difficulty": "Hard"
+  },
+  {
+    "question": "Learnable parameters in batch normalization",
+    "answer": "A batch normalization layer has two learnable parameters for each feature: 1. **Scale Parameter (\u03b3)**: This scales the normalized activations. 2. **Shift Parameter (\u03b2)**: This shifts the normalized activations. These parameters allow the network to learn the optimal scale and shift for the features, giving it the ability to undo the normalization if that proves beneficial for its representational power.",
+    "difficulty": "Hard"
+  }
+]

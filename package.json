@@ -1,0 +1,24 @@
+{
+  "name": "hxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinPika/hxy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MinPika/hxy/issues"
+  },
+  "homepage": "https://github.com/MinPika/hxy#readme",
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}

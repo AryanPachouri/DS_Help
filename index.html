@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DS Help - Tech Vibe</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>">
+  
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="dark-mode"> <!-- Default to dark mode -->
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="animated-gradient-text">📘 DS Help</h2>
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">
+          <svg id="icon-sun" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+
+      <nav class="nav-modes">
+        <button id="btn-study-mode" class="mode-btn active">Study Mode</button>
+        <button id="btn-quiz-mode" class="mode-btn">Quiz Mode</button>
+        <button id="btn-revision-mode" class="mode-btn">Revision Hub</button>
+      </nav>
+
+      <div class="filters-container">
+        <h3>🔍 Filters</h3>
+        
+        <div class="filter-group">
+          <label>Topics:</label>
+          <div id="topics-filter" class="checkbox-group">
+            <!-- Topics will be dynamically loaded here -->
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Difficulty:</label>
+          <div id="difficulty-filter" class="checkbox-group">
+            <label><input type="checkbox" value="Easy" checked> Easy</label>
+            <label><input type="checkbox" value="Medium" checked> Medium</label>
+            <label><input type="checkbox" value="Hard" checked> Hard</label>
+          </div>
+        </div>
+
+        <button id="btn-apply-filters" class="btn-primary">Apply Filters</button>
+      </div>
+      
+      <div class="sidebar-footer">
+        <p class="footer-text">DS Help by Aryan Pachouri</p>
+        <div class="social-links">
+          <a href="https://github.com/AryanPachouri" target="_blank" title="GitHub" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/aryanpachouri/" target="_blank" title="LinkedIn" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- STUDY MODE VIEW -->
+      <section id="study-view" class="view-section active">
+        <header class="view-header">
+          <div class="meta-info">
+            <span class="badge topic-badge" id="study-topic">Topic</span>
+            <span class="badge diff-badge" id="study-difficulty">Difficulty</span>
+          </div>
+          <div class="nav-controls">
+            <button id="btn-prev" class="btn-nav">⬅️ Previous</button>
+            <span class="question-counter">Q <input type="number" id="input-q-num" value="1" min="1" /> / <span id="total-q">0</span></span>
+            <button id="btn-next" class="btn-nav">Next ➡️</button>
+          </div>
+        </header>
+
+        <div class="question-card glass-panel" id="study-question-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <h2 id="study-question-text">Loading question...</h2>
+            <div class="card-actions">
+              <button id="btn-star-study" class="action-btn" title="Mark for Revision">⭐</button>
+              <button id="btn-note-study" class="action-btn" title="Toggle Note">📝</button>
+            </div>
+          </div>
+          
+          <div class="options-container" id="study-options">
+            <!-- Options dynamically added -->
+          </div>
+          
+          <div class="explanation-box hidden" id="study-explanation">
+            <h3>Explanation:</h3>
+            <p id="study-explanation-text"></p>
+          </div>
+          
+          <div id="study-note-container" class="note-container hidden">
+            <textarea id="study-note-input" placeholder="Type your notes here..."></textarea>
+            <button id="btn-save-note" class="btn-primary" style="margin-top: 8px;">Save Note</button>
+            <span id="note-save-status" style="margin-left:8px; color:var(--success); display:none;">Saved!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUIZ MODE SETUP VIEW -->
+      <section id="quiz-setup-view" class="view-section hidden">
+        <div class="glass-panel setup-panel">
+          <h2>🎯 Start a Quiz</h2>
+          <p>Select your topics and difficulty from the sidebar, then create a quiz.</p>
+          <div class="quiz-config" style="flex-direction:row; justify-content:center; gap:24px;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <label for="quiz-question-count">Number of Questions:</label>
+              <input type="number" id="quiz-question-count" value="10" min="1" max="50">
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <label for="quiz-time-limit">Time Limit (mins):</label>
+              <input type="number" id="quiz-time-limit" placeholder="Untimed" min="1" max="120">
+            </div>
+          </div>
+          <button id="btn-start-quiz" class="btn-primary btn-large">Start Quiz</button>
+        </div>
+      </section>
+
+      <!-- QUIZ MODE ACTIVE VIEW -->
+      <section id="quiz-active-view" class="view-section hidden">
+        <header class="view-header quiz-active-header">
+          <div class="meta-info" style="display:flex; width:100%; justify-content:space-between; align-items:center;">
+            <span class="badge">Quiz Mode</span>
+            <span id="quiz-timer-display" class="badge diff-badge hidden" style="font-size:1.1rem; font-variant-numeric: tabular-nums;">00:00</span>
+          </div>
+          <div class="quiz-progress-container">
+            <div class="quiz-progress-text">Question <span id="quiz-current-q">1</span> of <span id="quiz-total-q">10</span></div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="quiz-progress-fill"></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="question-card glass-panel" id="quiz-question-card">
+          <h2 id="quiz-question-text">Loading quiz...</h2>
+          <div class="options-container" id="quiz-options">
+            <!-- Options dynamically added -->
+          </div>
+        </div>
+
+        <div class="quiz-controls">
+          <button id="btn-quiz-next" class="btn-primary">Next Question</button>
+          <button id="btn-quiz-submit" class="btn-accent hidden">Submit Quiz</button>
+        </div>
+      </section>
+
+      <!-- QUIZ RESULTS VIEW -->
+      <section id="quiz-results-view" class="view-section hidden">
+        <div class="glass-panel results-panel">
+          <h2>🏆 Quiz Completed!</h2>
+          <div class="score-display">
+            <span id="quiz-score-num">0</span> / <span id="quiz-score-total">0</span>
+          </div>
+          <p id="quiz-feedback-msg">Great job!</p>
+          <button id="btn-quiz-restart" class="btn-primary">Take Another Quiz</button>
+        </div>
+
+        <div class="quiz-review-list" id="quiz-review-container">
+          <!-- Review cards added dynamically -->
+        </div>
+      </section>
+
+      <!-- REVISION HUB VIEW -->
+      <section id="revision-view" class="view-section hidden">
+        <header class="view-header">
+          <div class="meta-info">
+            <span class="badge">Revision Hub</span>
+          </div>
+        </header>
+        <div class="revision-container">
+          <div style="margin-bottom:24px;">
+            <h2>⭐ Starred & Notes</h2>
+            <p style="color:var(--text-secondary);">Review your marked questions and personal notes below.</p>
+          </div>
+          <div id="revision-list" class="revision-list">
+            <!-- Cards dynamically added here -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+  
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

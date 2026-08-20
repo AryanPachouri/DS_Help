@@ -25,6 +25,20 @@ function saveState() {
   localStorage.setItem('hxy_notes', JSON.stringify(userNotes));
 }
 
+// Toast Notification
+function showToast(message) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('hiding');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
 // DOM Elements - Setup
 const body = document.body;
 const themeToggleBtn = document.getElementById('theme-toggle');
@@ -53,10 +67,8 @@ function initData() {
     
     data.forEach(q => {
       q.topic = filename; // enforce topic from filename
-      if (!q.id) {
-        // Fallback ID if missing
-        q.id = filename + '_' + q.question.substring(0, 20).replace(/\s+/g, '_');
-      }
+      // Make ID globally unique by prepending topic
+      q.id = filename + '_' + (q.id || q.question.substring(0, 20).replace(/\s+/g, '_'));
       allQuestions.push(q);
       topics.add(filename);
     });
@@ -85,8 +97,12 @@ btnStudyMode.addEventListener('click', () => setMode('study'));
 btnQuizMode.addEventListener('click', () => setMode('quiz-setup'));
 btnRevisionMode.addEventListener('click', () => setMode('revision'));
 
+let quizTimerInterval = null;
+
 function setMode(mode) {
   currentMode = mode;
+  
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
   
   // Update Buttons
   btnStudyMode.classList.toggle('active', mode === 'study');
@@ -206,13 +222,14 @@ function renderStudyQuestion() {
     if (val) {
       userNotes[q.id] = val;
       btnNoteStudy.classList.add('has-note');
+      showToast("Note saved successfully!");
     } else {
       delete userNotes[q.id];
       btnNoteStudy.classList.remove('has-note');
+      showToast("Note removed.");
     }
     saveState();
-    noteSaveStatus.style.display = 'inline';
-    setTimeout(() => noteSaveStatus.style.display = 'none', 2000);
+    studyNoteContainer.classList.add('hidden');
   };
 
   if (q.options) {
@@ -314,6 +331,44 @@ btnStartQuiz.addEventListener('click', () => {
   quizIndex = 0;
   quizAnswers = {};
   setMode('quiz-active');
+  
+  // Timer Setup
+  const inputTimeLimit = document.getElementById('quiz-time-limit');
+  const timeLimitMins = parseFloat(inputTimeLimit.value);
+  const timerDisplay = document.getElementById('quiz-timer-display');
+  
+  if (timeLimitMins > 0) {
+    let timeLeft = Math.floor(timeLimitMins * 60);
+    timerDisplay.classList.remove('hidden');
+    
+    const updateDisplay = () => {
+      const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+      const s = (timeLeft % 60).toString().padStart(2, '0');
+      timerDisplay.textContent = `${m}:${s}`;
+      if (timeLeft <= 10) {
+        timerDisplay.style.color = 'var(--error)';
+        timerDisplay.style.background = 'rgba(239, 68, 68, 0.15)';
+      } else {
+        timerDisplay.style.color = '';
+        timerDisplay.style.background = '';
+      }
+    };
+    updateDisplay();
+    
+    quizTimerInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(quizTimerInterval);
+        showToast("Time's up!");
+        finishQuiz();
+      } else {
+        updateDisplay();
+      }
+    }, 1000);
+  } else {
+    timerDisplay.classList.add('hidden');
+  }
+  
   renderQuizQuestion();
 });
 
@@ -387,6 +442,8 @@ btnQuizNext.addEventListener('click', () => {
 btnQuizSubmit.addEventListener('click', finishQuiz);
 
 function finishQuiz() {
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+  
   let score = 0;
   const reviewContainer = document.getElementById('quiz-review-container');
   reviewContainer.innerHTML = '';

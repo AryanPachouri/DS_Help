@@ -2,6 +2,8 @@
 
 DS Help is a modern, fully client-side Data Science quiz and study application. It features a premium "Tech-Vibe" user interface, interactive 3D elements, and robust study tools designed to help you master Data Science concepts.
 
+🔗 **Live Demo:** [https://dshelp-phi.vercel.app/](https://dshelp-phi.vercel.app/)
+
 ## ✨ Features
 
 - **Study Mode**: Practice questions at your own pace. Get immediate feedback, detailed explanations, and celebrate correct answers with confetti bursts.
